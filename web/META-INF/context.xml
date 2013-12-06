@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="portal_client" path="/portal_client" debug="1" reloadable="true">
+	<Realm resourceName="PortalContent"
+		className="org.apache.catalina.realm.JDBCRealm"
+		connectionName="student"
+		connectionPassword="student"
+		connectionURL="jdbc:mysql://localhost/portal_test2"
+		digest="md5"
+		driverName="com.mysql.jdbc.Driver"
+		roleNameCol="Role"
+		userCredCol="Pass"
+		userNameCol="Login"
+		userRoleTable="seq_role"
+		userTable="ent_user"/>
+		
+<!--	<Realm className="org.apache.catalina.realm.UserDatabaseRealm"                
+         resourceName="UserDatabase" digest="sha"/> -->
+         
+	<Resource name="jdbc/portal"
+		auth="Container"
+		type="javax.sql.DataSource" 
+		username="student" 
+		password="student"
+		driverClassName="com.mysql.jdbc.Driver" 
+		url="jdbc:mysql://localhost/portal_test2"
+		maxActive="30" 
+		maxIdle="10"/>
+		
+</Context>

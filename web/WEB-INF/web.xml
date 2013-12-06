@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	<display-name>Knowledge Tree</display-name>
+	<description>Client application of an Adaprive Learning Portal</description>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<icon>
+		<small-icon>/assets/kt_favicon_16.png</small-icon>
+		<large-icon>/assets/kt_favicon_32.png</large-icon>
+	</icon>
+
+	<mime-mapping>
+		<extension>html</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>txt</extension>
+		<mime-type>text/plain</mime-type>
+	</mime-mapping>
+
+	<resource-ref>
+		<res-ref-name>jdbc/portal</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Unshareable</res-sharing-scope>
+	</resource-ref>
+	
+	<listener>
+		<listener-class>edu.pitt.sis.paws.cope.ClientSessionListener</listener-class>
+	</listener>
+
+	<!-- CONTEXT PARAMETERS -->
+<!--	<context-param>
+		<param-name>ums</param-name>
+		<param-value>http://kt1.exp.sis.pitt.edu:8080/cbum/um</param-value>
+	</context-param> -->
+
+	<!-- Client -->
+	<context-param>
+		<param-name>indexURL</param-name>
+		<param-value>/index.jsp</param-value>
+	</context-param>
+	<context-param>
+		<param-name>homeURL</param-name>
+		<param-value>/content/Show</param-value>
+	</context-param>
+	<context-param>
+		<param-name>authURL</param-name>
+		<param-value>/content/doAuthenticate</param-value>
+	</context-param>
+	<context-param>
+		<param-name>groupURL</param-name>
+		<param-value>/content/doGroup</param-value>
+	</context-param>
+	<context-param>
+		<param-name>errorURL</param-name>
+		<param-value>/relogin.jsp</param-value>
+	</context-param>
+
+	<!-- JSP Mapping -->
+	<servlet>
+		<servlet-name>jspShow</servlet-name>
+		<jsp-file>/WEB-INF/Show.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jspShow</servlet-name>
+		<url-pattern>/content/jspShow</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>jspMain</servlet-name>
+		<jsp-file>/WEB-INF/main.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jspMain</servlet-name>
+		<url-pattern>/content/jspMain</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>jspTop</servlet-name>
+		<jsp-file>/WEB-INF/top.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jspTop</servlet-name>
+		<url-pattern>/content/jspTop</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>jspLeft</servlet-name>
+		<jsp-file>/WEB-INF/left.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jspLeft</servlet-name>
+		<url-pattern>/content/jspLeft</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>jspRight</servlet-name>
+		<jsp-file>/WEB-INF/right.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jspRight</servlet-name>
+		<url-pattern>/content/jspRight</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>jspBottom</servlet-name>
+		<jsp-file>/WEB-INF/bottom.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jspBottom</servlet-name>
+		<url-pattern>/content/jspBottom</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>jspCOPESearch</servlet-name>
+		<jsp-file>/WEB-INF/CoPESearch.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jspCOPESearch</servlet-name>
+		<url-pattern>/content/jspCOPESearch</url-pattern>
+	</servlet-mapping>
+
+	<!-- Servlet Mapping -->
+	<servlet>
+		<servlet-name>Show</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.Show</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Show</servlet-name>
+		<url-pattern>/content/Show</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AjaxRobot</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.AjaxRobot</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AjaxRobot</servlet-name>
+		<url-pattern>/ajax_robot</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doEdit</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.doEdit</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doEdit</servlet-name>
+		<url-pattern>/content/doEdit</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doAdd</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.doAdd</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doAdd</servlet-name>
+		<url-pattern>/content/doAdd</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doDelete</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.doDelete</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doDelete</servlet-name>
+		<url-pattern>/content/doDelete</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doCopy</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.doCopy</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doCopy</servlet-name>
+		<url-pattern>/content/doCopy</url-pattern>
+	</servlet-mapping>
+
+	<!-- Authentication servlet -->
+	<servlet>
+		<servlet-name>doAuthenticate</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.doAuthenticate</servlet-class>
+	</servlet>
+	<servlet-mapping>
+
+		<servlet-name>doAuthenticate</servlet-name>
+		<url-pattern>/content/doAuthenticate</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doGroup</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.doGroup</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>doGroup</servlet-name>
+		<url-pattern>/content/doGroup</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AjaxCoPEAuthorRobot</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.AjaxCoPEAuthorRobot</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AjaxCoPEAuthorRobot</servlet-name>
+		<url-pattern>/content/AjaxCoPEAuthorRobot</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AjaxCoPEAuthorRobot</servlet-name>
+		<url-pattern>/ACAR</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TestServlet</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.TestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestServlet</servlet-name>
+		<url-pattern>/TestServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>JenaTester</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.rest.JenaTester</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JenaTester</servlet-name>
+		<url-pattern>/JenaTester</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RestNodeView</servlet-name>
+		<servlet-class>edu.pitt.sis.paws.cope.rest.RestNodeView</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RestNodeView</servlet-name>
+		<url-pattern>/rest/node</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Sequrity Settings -->
+	<session-config>
+		<session-timeout>180</session-timeout>
+	</session-config>
+	<security-role>
+		<description>User of the system</description>
+		<role-name>user</role-name>
+	</security-role>
+	<security-role>
+		<description>Administrator</description>
+		<role-name>admin</role-name>
+	</security-role>
+	
+	
+	<!-- Accessing Portal Content - security -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>PortalContent</web-resource-name>
+			<url-pattern>/content/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- Accessing REST - security -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>RESTresources</web-resource-name>
+			<url-pattern>/rest/user/*</url-pattern>
+			<url-pattern>/rest/group/*</url-pattern>
+			<url-pattern>/rest/users*</url-pattern>
+			<url-pattern>/rest/groups*</url-pattern>
+			<url-pattern>/rest/users/*</url-pattern>
+			<url-pattern>/rest/groups/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<!-- Accessing Portal Content - login -->
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>PortalContent</realm-name>
+		<form-login-config>
+			<form-login-page>/login.jsp</form-login-page>
+			<form-error-page>/relogin.jsp</form-error-page>
+		</form-login-config>
+	</login-config> 
+
+	<!-- Accessing REST - login
+	<login-config>
+		<auth-method>DIGEST</auth-method>
+		<realm-name>UserDatabase</realm-name>
+	</login-config> -->
+
+</web-app>

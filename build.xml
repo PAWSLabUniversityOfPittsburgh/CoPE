@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="CoPE" default="dist" basedir=".">
+	<!-- Imports -->
+	<import file="../ant_global.xml" />
+
+	<!-- Folder variables -->
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="web" location="web"/>
+	<property name="paws-core-jar" location="${web}/WEB-INF/lib/paws-core.jar"/>
+	<property name="paws-cope-jar" location="${web}/WEB-INF/lib/paws-cope.jar"/>
+	<property name="paws-cbum-jar" location="${web}/WEB-INF/lib/paws-cbum.jar"/>
+
+	<target name="clean" description="clean up" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete file="${paws-cope-jar}"/>
+	</target>	
+	
+	<target name="init" depends="clean">
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+	</target>
+
+	<target name="compile" depends="init" description="compile the source " >
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" debug="on"
+			classpath="${catalina_home}/lib/servlet-api.jar;
+				${catalina_home}/lib/jsp-api.jar;
+				${paws-core-jar};${paws-cbum-jar}"
+		/>
+	</target>
+
+	<target name="dist" depends="compile" description="generate the distribution" >
+		<!-- Build CoPE JAR file -->
+		<jar destfile="${paws-cope-jar}" basedir="${build}"/>
+	</target>
+	
+	<target name="deploy.mac" depends="dist" description="deploy on Mac" >
+		<copy todir="${catalina_home}/webapps/cope/">
+			<fileset file="${web}/**"/>
+		</copy>
+	</target>
+
+</project>
